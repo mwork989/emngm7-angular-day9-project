@@ -1,0 +1,154 @@
+<h3>Template Driven User form</h3>
+<hr />
+<form #userFormDetails="ngForm" (ngSubmit)="onSubmit(userFormDetails.value)" [mustMatch]="['password','confirmPassword']">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Email</label>
+        <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
+        #emailField="ngModel"
+        [(ngModel)]="userForm.email"
+        name="name"
+        required
+        email
+        [ngClass]="{'is-invalid': userFormDetails.submitted && emailField.invalid}" 
+        >
+        <div *ngIf="userFormDetails.submitted && emailField.invalid"class="invalid-feedback" > 
+ <div *ngIf="emailField.errors && emailField.errors['required']">
+            *
+          </div>
+          <div *ngIf="emailField.errors && emailField.errors['email']">
+            Enter a valid email
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Password</label>
+        <input type="password" class="form-control" id="inputPassword4" placeholder="Password"  [(ngModel)]="userForm.password"
+        name="password" #passwordField="ngModel"  required  [ngClass]="{'is-invalid': userFormDetails.submitted && passwordField.invalid}" >
+        <div *ngIf="userFormDetails.submitted && passwordField.invalid" class="invalid-feedback">
+          <div *ngIf="passwordField.errors && passwordField.errors['required']">
+            Please enter password
+          </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="inputConfirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="inputConfirmPassword"
+          placeholder="Confirm password"
+          name="confirmPassword"
+          [(ngModel)]="userForm.confirmPassword"
+          #confirmPassword="ngModel"
+          required
+          [ngClass]="{'is-invalid':userFormDetails.submitted && confirmPassword.invalid}"
+        />
+        <div *ngIf="userFormDetails.submitted && confirmPassword.invalid" class="invalid-feedback">
+          <div *ngIf="confirmPassword.errors && confirmPassword.errors['required']">
+            Please enter confirm password
+          </div>
+          <div *ngIf="confirmPassword.errors && confirmPassword.errors['mustMatch']">
+            Please enter same password
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress">Address</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" [(ngModel)]="userForm.address"
+      name="address"
+      #addressField="ngModel" required  minlength="5" maxlength="10"
+      [ngClass]="{'is-invalid': userFormDetails.submitted && addressField.invalid}" >
+      <div *ngIf="userFormDetails.submitted && addressField.invalid" class="invalid-feedback">
+        <div *ngIf="addressField.errors && addressField.errors['required']">
+          Please enter address
+        </div>
+        <div *ngIf="addressField.errors && addressField.errors['minlength']">
+          Please enter atleast 5 characters 
+        </div>
+        <div *ngIf="addressField.errors && addressField.errors['maxlength']">
+          Please do not enter more than 10 characters
+        </div>
+        </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress2">Address 2</label>
+      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" [(ngModel)]="userForm.address2"
+      name="address2" #addressField2="ngModel"  required [ngClass]="{'is-invalid': userFormDetails.submitted && addressField2.invalid}" >
+      <div *ngIf="userFormDetails.submitted && addressField2.invalid" class="invalid-feedback">
+        <div *ngIf="addressField2.errors && addressField2.errors['required']">
+          Please enter address2
+        </div>
+        </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity">City</label>
+        <input type="text" class="form-control" id="inputCity" [(ngModel)]="userForm.city"
+        name="city" required pattern="[a-zA-Z]*"  #cityField="ngModel" [ngClass]="{'is-invalid': userFormDetails.submitted && cityField.invalid}" >
+        <div *ngIf="userFormDetails.submitted && cityField.invalid" class="invalid-feedback">
+          <div *ngIf="cityField.errors && cityField.errors['required']">
+            Please enter address2
+          </div>
+          <div *ngIf="cityField.errors && cityField.errors['pattern']">
+            Please enter only characters
+          </div>
+          </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">State</label>
+        <select id="inputState" class="form-control" [(ngModel)]="userForm.state"
+        name="state" #stateField="ngModel" required [ngClass]="{'is-invalid':userFormDetails.submitted && stateField.invalid}">
+          <option selected>Choose...</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <div *ngIf="userFormDetails.submitted && stateField.invalid" class="invalid-feedback">
+          <div *ngIf="stateField.errors && stateField.errors['required']">
+            Please select state
+          </div>
+          </div>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Zip</label>
+        <input type="number" class="form-control" id="inputZip" [(ngModel)]="userForm.zip"
+        name="zip"  required min="5" max="10" #zipField="ngModel"   [ngClass]="{'is-invalid':userFormDetails.submitted && zipField.invalid}">
+        <div *ngIf="userFormDetails.submitted && zipField.invalid" class="invalid-feedback">
+          <div *ngIf="zipField.errors && zipField.errors['required']">
+            Please enter zipField
+          </div>
+          <div *ngIf="zipField.errors && zipField.errors['min']">
+            Please enter min range of 5
+          </div>
+          <div *ngIf="zipField.errors && zipField.errors['max']">
+            Please enter max range until 10
+          </div>
+          </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck" [(ngModel)]="userForm.disclaimer"
+        name="disclaimer">
+        <label class="form-check-label" for="gridCheck">
+          Check me out
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="userFormDetails.submitted && userFormDetails.invalid">Sign in</button>
+  </form>
+
+  <hr/>
+<div>
+  #email template variable reference :{{emailField.value}}
+</div>
+<div>
+  #userFormDetails template variable reference :{{userFormDetails.value | json}}
+</div>

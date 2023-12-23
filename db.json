@@ -1,0 +1,95 @@
+{
+  "template-form": [
+    {
+      "email": "asdasd",
+      "password": "asda",
+      "address": "sdasd",
+      "address2": "asdasd",
+      "city": "asdasd",
+      "state": "3",
+      "zip": "asdasd",
+      "id": 1
+    },
+    {
+      "email": "asdasd",
+      "password": "asda",
+      "address": "sdasd",
+      "address2": "asdasd",
+      "city": "asdasd",
+      "state": "3",
+      "zip": "asdasd",
+      "id": 2
+    },
+    {
+      "email": "asdasd",
+      "password": "asda",
+      "address": "sdasd",
+      "address2": "asdasd",
+      "city": "asdasd",
+      "state": "3",
+      "zip": "asdasd",
+      "id": 3
+    },
+    {
+      "email": "maria@test.com",
+      "password": "maria12345",
+      "address": "mariaadd1",
+      "address2": "mairaaddress2",
+      "city": "bangalore",
+      "state": "1",
+      "zip": 6,
+      "disclaimer": true,
+      "id": 4
+    }
+  ],
+  "reactive-form": [
+    {
+      "email": "123234",
+      "password": "234234234",
+      "address": "234",
+      "address2": "4234",
+      "city": "34234",
+      "state": "2",
+      "zip": "242343",
+      "disclaimer": [
+        false
+      ],
+      "id": 1
+    },
+    {
+      "email": "",
+      "password": "",
+      "address": "",
+      "address2": "",
+      "city": "",
+      "state": "",
+      "zip": "",
+      "disclaimer": false,
+      "shoppingList": [
+        {
+          "item": "vegetables",
+          "quantity": "2kg",
+          "price": 300
+        },
+        {
+          "item": "groceries",
+          "quantity": "1kg",
+          "price": 200
+        }
+      ],
+      "id": 2
+    },
+    {
+      "email": "david@test.com",
+      "password": "davi12345",
+      "address": "davidadd",
+      "address2": "davidaddress1detail1",
+      "city": "bangalore",
+      "state": "1",
+      "zip": "7",
+      "disclaimer": false,
+      "shoppingList": [],
+      "id": 3
+    }
+  ]
+}

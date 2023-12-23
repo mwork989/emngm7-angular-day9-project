@@ -1,0 +1,115 @@
+<h3>Reactive User form</h3>
+<hr />
+<form [formGroup]="userForm"  (ngSubmit)="onSubmit()">
+<!-- <form [formGroup]="userForm"  (ngSubmit)="onSubmit()" [mustMatch]="['password','confirmPassword']" > -->
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Email</label>
+        <input type="email" class="form-control" id="inputEmail41" placeholder="Email"  formControlName="email"   [ngClass]="{ 'is-invalid': isUserFormSubmitted && userFormControls['email'].errors}">
+        <div *ngIf="isUserFormSubmitted && userFormControls['email'].errors" class="invalid-feedback">
+         <div *ngIf="userFormControls['email'].errors['required']">email is required</div>
+         <div *ngIf="userFormControls['email'].errors['email']">Please enter valid email</div>
+         </div>
+         </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Password</label>
+        <input type="password" class="form-control" id="inputPassword41" placeholder="Password"  formControlName="password" [ngClass]="{ 'is-invalid': isUserFormSubmitted && userFormControls['password'].errors}">
+        <div *ngIf="isUserFormSubmitted && userFormControls['password'].errors" class="invalid-feedback">
+         <div *ngIf="userFormControls['password'].errors['required']">password is required</div>
+         </div>
+      </div>
+      
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="inputConfirmPassword1">Confirm Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="inputConfirmPassword1"
+          placeholder="Confirm password"
+          formControlName="confirmPassword"
+          [ngClass]="{ 'is-invalid': isUserFormSubmitted && userFormControls['confirmPassword'].errors}">
+          <div *ngIf="isUserFormSubmitted && userFormControls['confirmPassword'].errors" class="invalid-feedback">
+           <div *ngIf="userFormControls['confirmPassword'].errors['required']">Confirm password is required</div>
+           <div *ngIf="userFormControls['confirmPassword'].errors['mustMatch']"> password must be same</div>
+           </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress">Address</label>
+      <input type="text" class="form-control" id="inputAddress1" placeholder="1234 Main St"  formControlName="address" [ngClass]="{ 'is-invalid': isUserFormSubmitted && userFormControls['address'].errors}">
+      <div *ngIf="isUserFormSubmitted && userFormControls['address'].errors" class="invalid-feedback">
+       <div *ngIf="userFormControls['address'].errors['required']">address is required</div>
+       <div *ngIf="userFormControls['address'].errors['minlength']">Please enter atleast 5 characters</div>
+       <div *ngIf="userFormControls['address'].errors['maxlength']">address should not cross 10 characters</div>
+       </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress2">Address 2</label>
+      <input type="text" class="form-control" id="inputAddress21" placeholder="Apartment, studio, or floor"  formControlName="address2"   [ngClass]="{ 'is-invalid': isUserFormSubmitted && userFormControls['address2'].errors}">
+      <div *ngIf="isUserFormSubmitted && userFormControls['address2'].errors" class="invalid-feedback">
+       <div *ngIf="userFormControls['address2'].errors['required']">address2 is required</div>
+       </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity">City</label>
+        <input type="text" class="form-control" id="inputCity1"   formControlName="city"  [ngClass]="{ 'is-invalid': isUserFormSubmitted && userFormControls['city'].errors}">
+        <div *ngIf="isUserFormSubmitted && userFormControls['city'].errors" class="invalid-feedback">
+         <div *ngIf="userFormControls['city'].errors['required']">city is required</div>
+         <div *ngIf="userFormControls['city'].errors['pattern']">only characters allowed</div>
+         </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">State</label>
+        <select id="inputState1" class="form-control" formControlName="state" [ngClass]="{ 'is-invalid': isUserFormSubmitted && userFormControls['state'].errors}">
+          <option selected>Choose...</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <div *ngIf="isUserFormSubmitted && userFormControls['state'].errors" class="invalid-feedback">
+          <div *ngIf="userFormControls['state'].errors['required']">state is required</div>
+          </div>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip1">Zip</label>
+        <input type="text" class="form-control" id="inputZip1"   formControlName="zip"  [ngClass]="{ 'is-invalid': isUserFormSubmitted && userFormControls['zip'].errors}">
+        <div *ngIf="isUserFormSubmitted && userFormControls['zip'].errors" class="invalid-feedback">
+         <div *ngIf="userFormControls['zip'].errors['required']">zip is required</div>
+         <div *ngIf="userFormControls['zip'].errors['min']">Please enter more than 5</div>
+         <div *ngIf="userFormControls['zip'].errors['max']">please enter less than 10</div>
+         </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1"   formControlName="disclaimer">
+        <label class="form-check-label" for="gridCheck">
+          Check me out
+        </label>
+      </div>
+    </div>
+
+    <h4>Shopping List</h4>
+    <button type="button" class="btn btn-success" (click)="addShoppingList()">Add Shopping List</button>
+    <div formArrayName="shoppingList" *ngFor="let item of userFormControls['shoppingList'].value; let i =index;trackBy:trackShoppingItems">
+      <div [formGroupName]="i">
+        <input  type="text" class="form-control" placeholder="please enter name of the item" formControlName="item">
+        <input  type="text" class="form-control" placeholder="please enter qantity" formControlName="quantity">
+        <input  type="number" class="form-control" placeholder="please enter price" formControlName="price">
+          <hr/>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="isUserFormSubmitted && userForm.status==='INVALID'">Sign in</button>
+    <button type="button" class="btn btn-success" (click)="setValue()">Set value</button>
+    <button type="button" class="btn btn-danger"  (click)="patchValue()">Patch Value</button>
+    <button type="button" class="btn btn-warning"  (click)="reset()">Reset</button>
+  </form>
+
+  <div>
+    userform TS variable binding {{userForm.value | json}}
+  </div>
